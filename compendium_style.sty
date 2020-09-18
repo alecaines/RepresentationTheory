@@ -1,0 +1,241 @@
+\usepackage{geometry}                % See geo \documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{color, soul}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{epigraph}
+%%%%https://tex.stackexchange.com/questions/122848/tikz-the-pretty-boxes-to-frame-the-theorems-lemma-proposition-etc
+\usepackage[utf8]{inputenc}
+\UseRawInputEncoding %remove this if experiencing typesetting issues
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{calc}
+%\usepackage{chngcntr}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+%%%%%%%%%%%%%%%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\isom}{\cong}
+\newcommand{\setm}{\smallsetminus}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\tri}{\triangle}
+
+\newcommand{\bfi}{\mathbf i}
+\newcommand{\bfj}{\mathbf j}
+\newcommand{\bfk}{\mathbf k}
+\newcommand{\br}{\mathbf r}
+\newcommand{\bv}{\mathbf v}
+\newcommand{\bu}{\mathbf u}
+\newcommand{\bw}{\mathbf w}
+\newcommand{\bF}{\mathbf F}
+
+\newcommand{\va}{\vec{a}}
+\newcommand{\vb}{\vec{b}}
+\newcommand{\vc}{\vec{c}}
+\newcommand{\ve}{\vec{e}}
+\newcommand{\vi}{\vec{i}}
+\newcommand{\vj}{\vec{j}}
+\newcommand{\vk}{\vec{k}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\vu}{\vec{u}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vF}{\vec{F}}
+\newcommand{\vzero}{\vec{0}}
+
+\newcommand{\horline}{\noindent\rule{14.25cm}{0.6pt}\\}
+% counters
+\newcounter{theorem}
+\newcounter{lemma}
+\newcounter{definition}
+\newcounter{example}
+\newcounter{corollary}
+
+\counterwithin{theorem}{section}
+\counterwithin{lemma}{section}
+\counterwithin{definition}{section}
+\counterwithin{example}{section}
+\counterwithin{corollary}{section}
+
+% names for the structures
+\newcommand\theoname{Theorem}
+\newcommand\lemmname{Lemma}
+\newcommand\defname{Definition}
+\newcommand\exname{Example}
+\newcommand\corname{Corollary}
+
+\makeatletter
+% mdf key for the eventual notes in the structures
+\def\mdf@@mynote{}
+\define@key{mdf}{mynote}{\def\mdf@@mynote{#1}}
+
+
+% style for theorems
+\mdfdefinestyle{mytheo}{
+settings={\refstepcounter{theorem}},
+linewidth=1pt,
+innertopmargin=1.5\baselineskip,
+roundcorner=10pt,
+backgroundcolor=blue!05,
+linecolor=orange,
+singleextra={
+  \node[xshift=10pt,thick,draw=blue,fill=blue!20,rounded corners,anchor=west] at (P-|O) %
+  {\strut{\bfseries\theoname~\thetheorem}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+},
+firstextra={
+  \node[xshift=10pt,thick,draw=blue,fill=blue!20,rounded corners,anchor=west] at (P-|O) %
+  {\strut{\bfseries\theoname~\thetheorem}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+}
+}
+
+% style for lemmas
+\mdfdefinestyle{mylemm}{
+settings={\refstepcounter{lemma}},
+linewidth=1pt,
+innertopmargin=1.5\baselineskip,
+roundcorner=10pt,
+backgroundcolor=red!05,
+linecolor=red!70!black,
+singleextra={
+  \path let \p1=(P), \p2=(O) in
+  node[thick,draw=green!40!black,fill=green!20,rounded corners] at (P-|0.5*\x2+0.5*\x1,0) %
+  {\strut{\bfseries\lemmname~\thelemma}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+},
+firstextra={
+  \path let \p1=(P), \p2=(O) in
+  node[thick,draw=green!40!black,fill=green!20,rounded corners] at (P-|0.5*\x2+0.5*\x1,0) %
+  {\strut{\bfseries\lemmname~\thelemma}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+}
+}
+
+% style for definitions 
+\mdfdefinestyle{mydef}{
+settings={\refstepcounter{definition}},
+linewidth=1pt,
+innertopmargin=1.5\baselineskip,
+roundcorner=10pt,
+backgroundcolor=orange!15,
+linecolor=red!70!black,
+singleextra={
+  \path let \p1=(P), \p2=(O) in
+  node[xshift = 10pt, thick,draw=green!40!black,fill=orange!5,rounded corners,anchor=west] at (P-|O) %
+  {\strut{\bfseries\defname~\thedefinition}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+},
+firstextra={
+  \path let \p1=(P), \p2=(O) in
+  node[thick,draw=orange!15!black,fill=orange!15,rounded corners, anchor=west] at (P-|0) % 
+  {\strut{\bfseries\defname~\thedefinition}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+}
+}
+
+% style for examples
+\mdfdefinestyle{myex}{
+settings={\refstepcounter{example}},
+linewidth=1pt,
+innertopmargin=1.5\baselineskip,
+roundcorner=10pt,
+backgroundcolor=white!15,
+linecolor=blue!70!black,
+singleextra={
+  \path let \p1=(P), \p2=(O) in
+  node[xshift = 10pt, thick,draw=blue!40!black,fill=blue!5,rounded corners] at (P-|0.5*\x2+0.5*\x1,0) %
+  {\strut{\bfseries\exname~\theexample}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+},
+firstextra={
+  \path let \p1=(P), \p2=(O) in
+  node[thick,draw=blue!15!black,fill=white!15] at (P-|0.5*\x2+0.5*\x1,0) % 
+  {\strut{\bfseries\exname~\theexample}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+}
+}
+
+% style for examples
+\mdfdefinestyle{mycor}{
+settings={\refstepcounter{corollary}},
+linewidth=1pt,
+innertopmargin=1.5\baselineskip,
+roundcorner=10pt,
+backgroundcolor=white!15,
+linecolor=blue!70!black,
+singleextra={
+  \path let \p1=(P), \p2=(O) in
+  node[xshift = 10pt, thick,draw=blue!40!black,fill=blue!5,rounded corners] at (P-|0.5*\x2+0.5*\x1,0) %
+  {\strut{\bfseries\corname~\thecorollary}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+},
+firstextra={
+  \path let \p1=(P), \p2=(O) in
+  node[thick,draw=blue!15!black,fill=white!15] at (P-|0.5*\x2+0.5*\x1,0) % 
+  {\strut{\bfseries\corname~\thecorollary}\ifdefempty{\mdf@@mynote}{}{~(\mdf@@mynote)}};
+}
+}
+
+% some auxiliary environments
+\newmdenv[style=mytheo]{theor}
+\newmdenv[style=mylemm]{lemm}
+\newmdenv[style = mydef]{defin}
+\newmdenv[style = myex]{examp}
+\newmdenv[style = myprf]{prf}
+\newmdenv[style = mycor]{cor}
+% the actual environments
+\newenvironment{theorem}[1][]
+	{\begin{theor}[mynote=#1]}
+	{\end{theor}}
+\newenvironment{lemma}[1][]
+	{\begin{lemm}[mynote=#1]}
+	{\end{lemm}}
+\newenvironment{definition}[1][]
+	{\begin{dein}[mynote=#1]}
+	{\end{defin}}
+\newenvironment{example}[1][]
+	{\begin{examp}[mynote=#1]}
+	{\end{examp}}
+\newenvironment{corollary}[1][]
+	{\begin{cor}[mynote=#1]}
+	{\end{cor}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\rref}{rref}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\im}{im}
+\newcommand{\rank}{\text{rank}}
+
+\newcommand{\bb}{\begin{bmatrix}}
+\newcommand{\eb}{\end{bmatrix}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\QED}{\begin{flushright}$\blacksquare$\end{flushright}}
+
+%%%%%%%%%%%%%%%epigrapghs
+
+\usepackage{etoolbox}
+\makeatletter
+\newlength\epitextskip
+\pretocmd{\@epitext}{\em}{}{}
+\apptocmd{\@epitext}{\em}{}{}
+\patchcmd{\epigraph}{\@epitext{#1}\\}{\@epitext{#1}\\[\epitextskip]}{}{}
+\makeatother
+
+\setlength\epigraphrule{0pt}
+\setlength\epitextskip{2ex}
+
+\setlength\epigraphwidth{.8\textwidth}
+
+%Uncomment if display style is not working properly
+%\newcommand{\ds}{\displaystyle}
+%%%%%%%%%%%%%%%%%
