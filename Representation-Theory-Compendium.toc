@@ -1,2 +1,6 @@
-\global \c@tocdepth 2\relax 
-\contentsline {section}{\numberline {0.1}Permutations}{4}{section.0.1}%
+\global \c@tocdepth 3\relax 
+\contentsline {section}{\numberline {0.1}An Introduction}{4}{section.0.1}%
+\contentsline {subsection}{\numberline {0.1.1}Inspiration}{4}{subsection.0.1.1}%
+\contentsline {subsection}{\numberline {0.1.2}Representation Theory}{4}{subsection.0.1.2}%
+\contentsline {section}{\numberline {0.2}Groups and Group Homomorphisms}{5}{section.0.2}%
+\contentsline {section}{\numberline {0.3}Partitions and Permutations}{8}{section.0.3}%

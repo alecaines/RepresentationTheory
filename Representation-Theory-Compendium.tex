@@ -11,9 +11,107 @@
 \epigraph{Sometimes, when people are either too lazy or negligent to help you, you've just
 gotta hunker down and help yourself!}{The Misfit}
 \newpage
+
 \tableofcontents
 \newpage
-\addtocontents{toc}{\setcounter{tocdepth}{2}}
-\section{Permutations}
+
+\addtocontents{toc}{\setcounter{tocdepth}{3}}
+\section{An Introduction}
+\subsection{Inspiration}
+As a child, my favorite part of playing video games was figuring out how to beat the boss on a certain level. I would draw upon my 
+knowledge of the different enemies I had faced up until that point and realize that the boss fought in a similar fashion---but with 
+some new tweaks. I would then alter my already existing strategy to meet the boss's fighting style---and eventually defeat him.\\
+
+Often times when learning a new subject---especially one whose matters build on the developments of another subject---it can be 
+helpful to learn in a constructive fashion. Rather than jump into the more advanced subject off the bat, it might be more effective 
+to identify the root of the new subject in the developments of the old. Trivially, this is natural to mathematics (as few subjects 
+are independent of each other). However, with respect to pedagogy, it easy to find oneself ``lost in the weeds,'' per se. Personally, if 
+dependencies between matters are not elaborated upon, it becomes much harder to learn the current subject and anything that might build on 
+it. I am writing this book to help myself identify these dependencies with greater ease. I hope it serves the same effect for you as well.
+
+\subsection{Representation Theory}
+So, what exactly is representation theory? To be curt, representation theory is the study of different algebraic 
+structures \emph{represented} as vector spaces. Specifically, mathematicians who study representation theory search for 
+the appropriate \emph{linear transformations} that preserve the patterns observed in an algebraic structure. Because the 
+algebra of matrices is more intuitive to most mathematicians, it is valuable to be able to represent algebras using vector spaces.
+This book will explore the different liberties afforded by representations and how they can be used to standardize
+and in a way unify the fields of combinatorics, numbertheory, and algebra!\\
+
+\newpage
+
+\section{Groups and Group Homomorphisms}
+Let's start small and recapitulate a bit of algebra before we dive into playing around with representations.
+The simplest algebraic structure is the group, a set $G$ paired with an operation $\otimes$ (often denoted ($G$, $\otimes$)). 
+Recall, for a set to be a group with an operation $\otimes$, it must abide by the following properties: $\forall a,b, c \in G$\\
+\begin{defin}
+	\begin{center}
+		\underline{\textbf{Group Properties}}
+		\begin{enumerate}
+			\item[1.] (Closure under $\otimes$) $a \otimes b \in G$\\
+			\item[2.] (Existence of an identity) $\exists e \in G \ni e \otimes a = a$\\
+			\item[3.] (Associativity) $(a \otimes b) \otimes c = a \otimes (b \otimes c)$\\
+		\end{enumerate}
+	\end{center}
+\end{defin}
+To construct our first representation, we need a group that can be mapped onto by $G$. Take the general linear group of order $d$, $GL_d(\mathbb{C})$\footnote{
+We could substitute any field in for $\mathbb{C}$, but $\mathbb{C}$ is the standard in the field and will be used here.} defined,
+$$GL_d(\mathbb{C}) := \Bigg\{M \mid M := \Bigg(\begin{matrix} a_{1,1} & a_{1,2} & \dots & a_{1,d}\\ \vdots & \vdots & \vdots & \ddots\\ a_{d,1} & a_{d, 2},
+	& \dots & a_{d,d}\end{matrix}\Bigg) \text{, and $M$ is invertible with } a_{i,j} \in \mathbb{C}, \forall i,j \in [0,n]\Bigg\} $$
+Using $GL_d(\mathbb{C})$ is standard in representation theory when introducing the essence of a representation for three reasons:
+
+\begin{center}
+	\begin{enumerate}
+		\item[1.] Because its elements are \emph{square}, $\forall A, B \in GL_d(\mathbb{C})$, $A \cdot B \in GL_d(\mathbb{C})$. (satisfying the closure condition for 
+			groups)\\
+		\item[2.] Note, $I_d := \Bigg( \begin{matrix} 1 & 0 & \dots & 0\\ 0 & 1 & \dots 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \dots & 1 \end{matrix} \Bigg) \in GL_d(\mathbb{C})$ 
+				as $1,0 \in \mathbb{C}$. So, $\forall A \in GL_d(\mathbb{C})$, $I_d \cdot A = A$. So, the identity element exists in $GL_d(\mathbb{C})$\\
+		\item[3.] Finally, it is a well known fact that matrix multiplication is associative\footnote{But not necessarily commutative!}. So, $\forall A, B, C \in GL_d(\mathbb{C}), 
+			A \cdot (B \cdot C) = (A \cdot B) \cdot C$.
+	\end{enumerate}
+\end{center}
+
+Essentially, the general linear group is special because it is easy to construct and (as is implied by the name) shares some of the same functions as a group!\footnote{It should be noted that 
+the actual structure of the general linear group is that of a field (which affords us more liberties than are present in the otherwise limited structure of a group).} Now that we have two 
+structures that are similar to each other, let us see if we can represent one using the other.
+
+Let us now define a function $\mathcal{X}: G \to GL_d(\mathbb{C})$. $\mathcal{X}$ is known as the \emph{character} of $G$ and maps to the appropriate representations in $GL_d(\mathbb{C})$. Now, 
+it should be known that the mapping itself is not invariant among all groups. Meaning, that there is no single definition for $\mathcal{X}$ which necessary applies to any two groups $G$ and $H$. 
+However, what is absolutely necessary of $\mathbb{X}$ is that it has the following properties:
+
+\begin{defin}
+	\begin{center}
+		\underline{\textbf{Group Homomorphism}}\\
+	\end{center}
+	\vspace*{1mm}
+	Let $\phi: G \to H$ be defined for groups $(G, \otimes_G)$ and $(H, \otimes_H)$. $\phi$ is a \textbf{group homomorphism} if,
+	\begin{enumerate}
+		\item[1.] $\forall a,b \in G, \phi(a \otimes_G b) = \phi(a) \otimes_H \phi(b)$.
+		\item[2.] For $e_G$ the identity in $G$, $\phi(e_G) = e_H$.
+	\end{enumerate}
+\end{defin}
+
+\begin{examp}
+	\begin{center}
+		\underline{\textbf{A Special Representation for $C_4$}}\\
+	\end{center}
+	Consider the following set and operation, $C_n := \{g^k | \forall k \in [0,n-1]\}$, $\otimes:C_n \times C_n \to C_n,$ $g^i \otimes g^j = g^{i+j \text{ (mod n)}}$. The group 
+	$(C_n, \otimes)$ is called the cyclic group of order $n$ and serves as an abstraction of the modulo arithmetic familiar to the integers\footnote{i.e. addition in $\mathbb{Z}_n.$}
+	I will construct a character $\mathcal{X}$ that represents the elements of $C_4$ (the cyclic group of order 4) in the complex numbers.\\
+
+	Let $G := \{e, g, g^2, g^3\}$ and $H := \{1, i, -1, -i\}$. Consider, $\mathcal{X}: G \to H$, that maps $g^k \mapsto i^k \in H$. Recall, to show that $\mathcal{X}$ is a representation of $G$, 
+	we must show that it is a homomorphism between $G$ and $H$. Note, for $g^m, g^n \in G$, $\mathcal{X}(g^m \otimes g^n) = \mathcal{X}(g^{m+n \text{ (mod 4)}}) = i^{m+n \text{ (mod 4)}}$. Note that 
+	$i^{m \text{ (mod 4)}} \cdot i^{n \text{ (mod 4)}} = i^{m+n \text{ (mod 4)}}$. So, $\mathcal{X}(g^m \otimes g^n) = i^m \cdot i^n$. Trivially, $\mathcal{X}(e) = 1$. So, $\mathcal{X}$ is a 
+	homomorphism between $G$ and $H$ and is thus a representation!
+
+\end{examp}
+
+The group homomorphism is mechanism that establishes a representation. It is the definition of the group homomorphism that establishes the representation of the elements of $G$ in $H$. In the 
+next chapter we will explore how to represent a familiar object from combinatorics in $\mathbb{R}^n$.
+
+\newpage
+
+\section{Partitions and Permutations}
+
+
 
 \end{document}
