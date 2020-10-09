@@ -22,5 +22,8 @@ class SYMMETRICGROUP(object):
         withoutSingletons = list(filter(lambda p: p[0] != p[1], permutations))
         transitions = list(set(list(map(lambda p: tuple([min(p), max(p)]), withoutSingletons))))
 
-        return list(set(transitions+[perm.PERMUTATION(p).compose(perm.PERMUTATION(q)) for q in transitions for p in transitions]))
+        p = perm.PERMUTATION((2,3))
+        q = perm.PERMUTATION((1,2))
+        print(str(q)+str(p), "=", q.compose(p))
 
+        return list(set(transitions+[perm.PERMUTATION(p).compose(perm.PERMUTATION(q)) for q in transitions for p in transitions]))

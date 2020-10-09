@@ -26,7 +26,6 @@ class PERMUTATION(object):
        return self.permutation[p]
 
     def compose(self, other):
-
         #until you figure out how to one shot...
         if self.og == other.og:
             return tuple([1])
@@ -38,10 +37,9 @@ class PERMUTATION(object):
             composition = [other.og[0]]+[
                    self.next(other.next(q)) if (other.next(q) in self.og)
                    else other.next(q)
-            for q in list(other.getOG())]
+            for q in other.og]
             
             if composition == other.og:
                 return tuple([1])
             else:
-                 return tuple(composition) if (list(set(composition)) == composition)
-                         else tuple(list(set(composition)))
+                 return tuple(composition) if (list(set(composition)) == composition) else tuple(list(set(composition)))
