@@ -11,7 +11,12 @@ class SYMMETRICGROUP(object):
     
     def getObject(self):
         s = list(range(1, self.order+1))
-        withSingletons =  list(chain.from_iterable(combinations(s,r) for r in range(len(s)+1)))
-        return list(filter(lambda k: len(list(k)) != 1, withSingletons))
+        withSingletons =  list(chain.from_iterable(combinations(s,r)
+            for r in range(len(s)+1)))
+        emptyToSingleton = list(map(
+                    lambda k: (tuple((1)) if k == () else k),
+                    withSingletons))
+        print(emptyToSingleton)
+        return list(filter(lambda k: len(list(k)) != 1, emptyToSingleton))
         #return [[j+1 for j in range(i, self.order)] for i in range(self.order)]
     
