@@ -26,23 +26,22 @@ class PERMUTATION(object):
        return self.permutation[p]
 
     def compose(self, other):
-        return [
-                    (self.next(other.next(q)) if (other.next(q) in self.og)
-                    else other.next(q))
-                    for q in list(other.getOG()) 
-                ]
-        '''
-        for p in other.getOG():
-            if other.next(p) not in self.og:
-                result.append(p)
-                result.append(other.next(p))
+
+        #until you figure out how to one shot...
+        if self.og == other.og:
+            return tuple([1])
+        elif len(other.og) == 1:
+            return tuple(self.og)
+        elif len(self.og) == 1:
+            return tuple(other.og)
+        else:
+            composition = [other.og[0]]+[
+                   self.next(other.next(q)) if (other.next(q) in self.og)
+                   else other.next(q)
+            for q in list(other.getOG())]
+            
+            if composition == other.og:
+                return tuple([1])
             else:
-                result.append(
-        '''
-
-
-        '''
-        return str([other.getOG()[0]]+ [self.next(other.next(p)) if other.next(p) in self.og
-                    else other.next(p)
-                    for p in other.getOG()]).replace('[','(').replace(']',')').replace(',','')
-        '''
+                 return tuple(composition) if (list(set(composition)) == composition)
+                         else tuple(list(set(composition)))

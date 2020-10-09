@@ -3,13 +3,17 @@ import symmgroup as sg
 
 
 S3 = sg.SYMMETRICGROUP(3)
-print(S3)
 
+print(S3.generate())
+
+'''
 cayley = {(p,q):tuple(perm.PERMUTATION(p).compose(perm.PERMUTATION(q))) 
         for q in S3.getObject() for p in S3.getObject()}
 
 for r in cayley:
     print(r, ":", cayley[r],"\n\n")
+'''
+
 '''
 p = perm.PERMUTATION((1,2))
 q = perm.PERMUTATION((2,3))

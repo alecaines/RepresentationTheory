@@ -1,4 +1,5 @@
 from itertools import chain, combinations
+import permutation as perm
 
 class SYMMETRICGROUP(object):
 
@@ -11,8 +12,15 @@ class SYMMETRICGROUP(object):
     
     def getObject(self):
         s = list(range(1, self.order+1))
-        withSingletons =  list(chain.from_iterable(combinations(s,r)
-            for r in range(len(s)+1)))
+        withSingletons =  list(chain.from_iterable(combinations(s,r) for r in range(len(s)+1)))
         removeSingletons = list(filter(lambda k: len(list(k)) > 1, withSingletons))
+
         return [tuple([1])]+removeSingletons
-    
+   
+    def generate(self):
+        permutations = [tuple([i,j]) for j in range(1,self.order+1) for i in range(1, self.order+1)]
+        withoutSingletons = list(filter(lambda p: p[0] != p[1], permutations))
+        transitions = list(set(list(map(lambda p: tuple([min(p), max(p)]), withoutSingletons))))
+
+        return list(set(transitions+[perm.PERMUTATION(p).compose(perm.PERMUTATION(q)) for q in transitions for p in transitions]))
+
