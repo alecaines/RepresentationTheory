@@ -26,7 +26,7 @@ class PERMUTATION(object):
        return self.permutation[p]
 
     def compose(self, other):
-        return [other.getOG()[0]]+[
+        return [
                     (self.next(other.next(q)) if (other.next(q) in self.og)
                     else other.next(q))
                     for q in list(other.getOG()) 
