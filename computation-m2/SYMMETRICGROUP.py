@@ -14,9 +14,9 @@ class SYMMGROUP(object):
     def __repr__(self):
         cayley = [
                     [
-                        tuple([
+                        tuple(self.toCycle([
                                 pr(pc(i))
-                            for i in range(1,self.n+1)])
+                            for i in range(1,self.n+1)]))
                         for pc in self.perms]
                 for pr in self.perms]
 
@@ -31,5 +31,15 @@ class SYMMGROUP(object):
         return ""
 
     def toCycle(self, p):
-       pass 
+        couples = list(zip(list(range(1,len(p)+1)), p))
+        s = []
+        current = -1
+        for c in couples:
+           if current == -1 and (c[0] != c[1]):
+               s.append(c[0])
+               s.append(c[1])
+               current = c[1]
+           elif current == c[0]:
+               s.append(c[1])
+        return s
 
