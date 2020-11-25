@@ -7,14 +7,18 @@ class PERMUTATION(object):
         self.terms = terms
         self.permutation = self.createPermutation(terms)
         self.inverse = self.getInverse()
+        self.sgn = (-1)**(self.cycletype - 1)
 
     def __repr__(self):
         return str(self.terms).replace("[","(").replace("]",")").replace(",", "")
 
+    def signature(self, p):
+        return (-1)**(len(p) - 1)
+
     def show(self, p):
         s = [p(i) for i in self.terms]
-        s = s[len(s)-1:] + s[:len(s)-1]
-        s = str(s[::-1])
+        s = str(s[len(s)-1:] + s[:len(s)-1])
+        #s = str(s[::-1])
 
         return s.replace("[","(").replace("]",")").replace(",", "")
     

@@ -1,16 +1,17 @@
 import PERMUTATIONS
 import SYMMETRICGROUP 
 
-'''
-p = PERMUTATIONS.PERMUTATION([1,3,2])
-q = PERMUTATIONS.PERMUTATION([1,3,2])
-print(p)
-pp = p.permutation
-ppi = p.inverse
-print(p.show(ppi))
-'''
-
+#Testing permutation class
 s3 = SYMMETRICGROUP.SYMMGROUP(3)
+e = PERMUTATIONS.PERMUTATION([1,2,3])
+ee = e.permutation
 
+'''
+for p in s3.perms:
+    print(e.show(p), "::", "1 -> " + str(p(1)), "2 -> " + str(p(2)), "3 -> " + str(p(3)))
+
+
+'''
+#Testing symmetric group
+s3 = SYMMETRICGROUP.SYMMGROUP(3)
 print(s3)
-
