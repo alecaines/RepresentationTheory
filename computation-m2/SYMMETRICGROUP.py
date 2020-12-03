@@ -44,23 +44,30 @@ class SYMMGROUP(object):
         print("=========================================================")
         return ""
 
-    def toCycle(self, p):
-        hash_cycle = lambda p, n: {i:p(i) for i in range(1, n+1)}
-        d = hash_cycle(p, self.n)
+    def toCycle(self, pl):
+        p = PERMUTATIONS.PERMUTATION(pl).permutation
+        hash_cycle = lambda n: {i+1:pl[i] for i in range(n)}
+        d = hash_cycle(self.n)
         origin = -1
-        for i in range(self.n):
-            if i != d[i]:
+        for i in range(1, self.n+1):
+            print("pairings",i, pl[i-1])
+            if i != pl[i-1]:
                 origin = i
                 break
-        current = -1
+        current = origin 
         cycle = []
-        if current == -1:
+        if origin == -1:
             return [1, 2, 3]
         else:
-            while current != origin:
+            print("current",current)
+            cycle.append(current)
+            count = 0
+            while count > 0 & current != origin:
                 cycle.append(d[current])
                 current = d[current] 
-        return cycle                
+                count+=1
+                print(current)
+            return cycle                
         '''
         couples = dict(zip(list(range(1,len(p)+1)), p))
         cycle = []

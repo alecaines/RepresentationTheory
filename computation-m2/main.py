@@ -22,4 +22,4 @@ for p in s3.perms:
 #Testing symmetric group
 '''
 s3 = SYMMETRICGROUP.SYMMGROUP(3)
-print(s3)
+print(s3.toCycle([1,3,2]))
