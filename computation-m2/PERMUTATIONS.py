@@ -42,11 +42,14 @@ class PERMUTATION(object):
         return inverse
 
     def createPermutation(self, terms):
-        s = "lambda x: "
-        for i in range(len(terms)):
-            if i == len(terms)-1:
-                s+= str(terms[0]) + " if x == " + str(terms[i]) + " else x"
-            else:
-                s+= str(terms[i+1]) + " if x == " + str(terms[i]) + " else "
+        if len(terms) == 0:
+            return eval('lambda x: x')
+        else:
+            s = "lambda x: "
+            for i in range(len(terms)):
+                if i == len(terms)-1:
+                    s+= str(terms[0]) + " if x == " + str(terms[i]) + " else x"
+                else:
+                    s+= str(terms[i+1]) + " if x == " + str(terms[i]) + " else "
 
         return eval(s)

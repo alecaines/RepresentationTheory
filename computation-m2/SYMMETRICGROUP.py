@@ -45,6 +45,23 @@ class SYMMGROUP(object):
         return ""
 
     def toCycle(self, p):
+        hash_cycle = lambda p, n: {i:p(i) for i in range(1, n+1)}
+        d = hash_cycle(p, self.n)
+        origin = -1
+        for i in range(self.n):
+            if i != d[i]:
+                origin = i
+                break
+        current = -1
+        cycle = []
+        if current == -1:
+            return [1, 2, 3]
+        else:
+            while current != origin:
+                cycle.append(d[current])
+                current = d[current] 
+        return cycle                
+        '''
         couples = dict(zip(list(range(1,len(p)+1)), p))
         cycle = []
         origin = -1
@@ -62,12 +79,11 @@ class SYMMGROUP(object):
             while current != origin:
                 cycle.append(couples[current])
                 current = couples[current]
-            '''
-            for i in range(len(p) - 1):
-                current = couples[current]
-                cycle.append(current)
-            '''
+            #for i in range(len(p) - 1):
+            #    current = couples[current]
+            #    cycle.append(current)
         return cycle
+        '''
 
         '''
         current = -1
